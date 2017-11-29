@@ -12,7 +12,7 @@ class Notes {
     @OneToOne
     var recipe: Recipe = Recipe()
 
-//    @Lob
-//    var recipeNotes: String = ""
+    @Lob
+    var recipeNotes: String = ""
 
 }
