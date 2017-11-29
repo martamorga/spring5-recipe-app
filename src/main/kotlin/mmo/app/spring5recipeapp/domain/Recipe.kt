@@ -24,12 +24,23 @@ class Recipe {
     var directions: String = ""
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), mappedBy = "recipe")
-    var ingredints: Set<Ingredient> = HashSet()
+    var ingredients: Set<Ingredient> = HashSet()
 
-    @Lob
-    var image: Byte = Byte.MIN_VALUE
+//    @Lob
+//    var image: Byte = Byte.MIN_VALUE
 
-    @OneToOne(cascade = arrayOf(CascadeType.ALL))
-    var notes: String = ""
+    @Enumerated(value = EnumType.STRING)
+    var difficulty: Difficulty = Difficulty.EASY
+
+//    @OneToOne(cascade = arrayOf(CascadeType.ALL))
+//    var notes: Notes = Notes()
+
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+            joinColumns = arrayOf(JoinColumn(name = "recipe_id")),
+            inverseJoinColumns = arrayOf(JoinColumn(name = "category_id")))
+    var categories: Set<Category> = HashSet()
+
+
 
 }

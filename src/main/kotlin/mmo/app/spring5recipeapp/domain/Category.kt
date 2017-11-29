@@ -3,16 +3,15 @@ package mmo.app.spring5recipeapp.domain
 import javax.persistence.*
 
 @Entity
-class Notes {
+class Category{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
-    @OneToOne
-    var recipe: Recipe = Recipe()
+    var description: String = ""
 
-//    @Lob
-//    var recipeNotes: String = ""
+    @ManyToMany(mappedBy = "categories")
+    var recipes: Set<Recipe> = HashSet()
 
 }

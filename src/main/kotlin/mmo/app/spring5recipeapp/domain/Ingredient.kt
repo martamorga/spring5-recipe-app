@@ -14,6 +14,11 @@ class Ingredient{
 
     var amount: BigDecimal = BigDecimal(0)
 
+    @OneToOne(fetch = FetchType.EAGER)
+    var unitOfMeasure: UnitOfMeasure = UnitOfMeasure()
+
     @ManyToOne
     var recipe: Recipe = Recipe()
+
+
 }
