@@ -32,8 +32,8 @@ class Recipe {
     @Enumerated(value = EnumType.STRING)
     var difficulty: Difficulty = Difficulty.EASY
 
-//    @OneToOne(cascade = arrayOf(CascadeType.ALL))
-//    var notes: Notes = Notes()
+    @OneToOne
+    var notes: Notes = Notes()
 
     @ManyToMany
     @JoinTable(name = "recipe_category",

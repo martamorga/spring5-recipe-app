@@ -9,9 +9,6 @@ class Notes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
-    @OneToOne
-    var recipe: Recipe = Recipe()
-
     @Lob
     var recipeNotes: String = ""
 
