@@ -25,9 +25,9 @@ class Recipe {
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), mappedBy = "recipe")
     var ingredients: Set<Ingredient> = HashSet()
-
-    @Lob
-    var image: Byte = Byte.MIN_VALUE
+//
+//    @Lob
+//    var image: Byte = Byte.MIN_VALUE
 
     @Enumerated(value = EnumType.STRING)
     var difficulty: Difficulty = Difficulty.EASY
