@@ -24,7 +24,7 @@ class Recipe {
     var directions: String = ""
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), mappedBy = "recipe")
-    var ingredients: Set<Ingredient> = HashSet()
+    var ingredients: Set<Ingredient> = hashSetOf()
 //
 //    @Lob
 //    var image: Byte = Byte.MIN_VALUE
@@ -32,8 +32,8 @@ class Recipe {
     @Enumerated(value = EnumType.STRING)
     var difficulty: Difficulty = Difficulty.EASY
 
-    @OneToOne
-    var notes: Notes = Notes()
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
+    var notes: Notes? = null
 
     @ManyToMany
     @JoinTable(name = "recipe_category",

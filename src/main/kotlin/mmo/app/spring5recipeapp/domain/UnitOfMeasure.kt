@@ -9,7 +9,7 @@ import javax.persistence.Id
 class UnitOfMeasure{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
+    var id: Long? = null
 
     var description: String = ""
 }

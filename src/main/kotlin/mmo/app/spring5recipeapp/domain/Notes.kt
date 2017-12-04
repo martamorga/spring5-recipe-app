@@ -12,4 +12,7 @@ class Notes {
     @Lob
     var recipeNotes: String = ""
 
+    @OneToOne(cascade = arrayOf(CascadeType.ALL))
+    var notes: Notes? = null
+
 }
