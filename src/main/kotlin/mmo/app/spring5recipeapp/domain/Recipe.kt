@@ -9,6 +9,7 @@ class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0
 
+    @Lob
     var description: String = ""
 
     var prepTime: Int = 0
@@ -21,6 +22,7 @@ class Recipe {
 
     var url: String = ""
 
+    @Lob
     var directions: String = ""
 
     @OneToMany(cascade = arrayOf(CascadeType.ALL), mappedBy = "recipe")

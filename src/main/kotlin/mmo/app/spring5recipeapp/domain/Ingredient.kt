@@ -14,7 +14,7 @@ class Ingredient{
 
     var amount: BigDecimal = BigDecimal(0)
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = arrayOf(CascadeType.ALL))
     var unitOfMeasure: UnitOfMeasure? = null
 
     @ManyToOne
