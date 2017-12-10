@@ -7,7 +7,7 @@ class Category{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
+    var id: Long? = null
 
     var description: String = ""
 
