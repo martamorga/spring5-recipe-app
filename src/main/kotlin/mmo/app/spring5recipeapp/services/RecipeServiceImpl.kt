@@ -15,4 +15,9 @@ class RecipeServiceImpl : RecipeService {
     override fun getRecipes(): Set<Recipe> = recipeRepository.findAll().toHashSet()
 
 
+    override fun findById(id: Long): Recipe {
+
+        return recipeRepository.findOne(id) ?: throw Exception("Nie znaleziono przepisu o danym ID")
+
+    }
 }

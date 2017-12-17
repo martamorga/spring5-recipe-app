@@ -30,10 +30,10 @@ class RecipeBootstap : ApplicationListener<ContextRefreshedEvent> {
 
         val each = unitOfMeasureRepository.findByDescription("Each") ?: throw Exception("BLAD")
         val tableSpoon = unitOfMeasureRepository.findByDescription("Tablespoon") ?: throw Exception("BLAD")
-        val teaSpoon = unitOfMeasureRepository.findByDescription("Teaspoon")
-        val dash = unitOfMeasureRepository.findByDescription("Dash")
-        val pint = unitOfMeasureRepository.findByDescription("Pint")
-        val cups = unitOfMeasureRepository.findByDescription("Cup")
+        val teaSpoon = unitOfMeasureRepository.findByDescription("Teaspoon") ?: throw Exception("BLAD")
+        val dash = unitOfMeasureRepository.findByDescription("Dash") ?: throw Exception("BLAD")
+        val pint = unitOfMeasureRepository.findByDescription("Pint") ?: throw Exception("BLAD")
+        val cups = unitOfMeasureRepository.findByDescription("Cup") ?: throw Exception("BLAD")
 
         val dashUom = dash.description
         val pintUom = pint.description
