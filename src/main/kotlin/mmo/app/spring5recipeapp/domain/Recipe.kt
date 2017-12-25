@@ -35,7 +35,7 @@ class Recipe {
     var difficulty: Difficulty = Difficulty.EASY
 
     @OneToOne(cascade = arrayOf(CascadeType.ALL))
-    var notes: Notes? = null
+    var notes: Notes = Notes()
 
     @ManyToMany
     @JoinTable(name = "recipe_category",

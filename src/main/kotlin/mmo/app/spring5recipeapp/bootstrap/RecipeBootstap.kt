@@ -103,6 +103,8 @@ class RecipeBootstap : ApplicationListener<ContextRefreshedEvent> {
             notes = guacNotes
             ingredients = setOf(i1g, i2g, i3g, i4g)
             categories = setOf(americanCategory, mexicanCategory)
+            url = "http://www.simplyrecipes.com/recipes/perfect_guacamole/"
+            source = "Simply recipes"
         }
 
 
