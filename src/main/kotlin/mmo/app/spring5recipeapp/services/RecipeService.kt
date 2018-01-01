@@ -1,6 +1,5 @@
 package mmo.app.spring5recipeapp.services
 
-import mmo.app.spring5recipeapp.commands.RecipeCommand
 import mmo.app.spring5recipeapp.domain.Recipe
 
 interface RecipeService {
@@ -9,5 +8,12 @@ interface RecipeService {
 
     fun findById(id: Long): Recipe
 
-    fun saveRecipeCommand(command: RecipeCommand): RecipeCommand
+    fun create(recipe: Recipe): Recipe
+
+    fun save(recipe: Recipe): Recipe
+
+    fun edit(recipe: Recipe): Recipe
+
+    fun deleteById(id: Long)
+
 }

@@ -17,14 +17,18 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
+<ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="#" th:href="@{/index}">Wszystkie przepisy</a></li>
+    <li role="presentation"><a href="#">Pokaży wybrany przepis</a></li>
+    <li role="presentation"><a href="#" th:href="@{/recipe/create}">Dodaj przepis</a></li>
+</ul>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">My Recipes!</h1>
+                    <h1 class="panel-title">Moje przepisy</h1>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
@@ -32,14 +36,15 @@
                             <thead class="thead-inverse">
                             <tr>
                                 <th>ID</th>
-                                <th>Description</th>
-                                <th>View</th>
+                                <th>Opis</th>
+                                <th>Zobacz</th>
+                                <th>Aktualizuj</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
                                 <td>123</td>
                                 <td>Tasty Goodnees 1</td>
-                                <td><a href="#">View</a></td>
+                                <td><a href="#" name="create" >View</a></td>
                             </tr>
                             <tr th:remove="all">
                                 <td>12333</td>
@@ -51,7 +56,8 @@
                                 <!--/*@thymesVar id="recipe" type="mmo.app.spring5recipeapp.domain.Recipe"*/-->
                                 <td th:text="${recipe.id}">334</td>
                                 <td th:text="${recipe.description}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/'+ ${recipe.id}} +'/show' ">Zobacz</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Aktualizuj</a></td>
                             </tr>
                         </table>
                     </div>

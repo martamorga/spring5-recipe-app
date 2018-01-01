@@ -1,14 +1,12 @@
 package mmo.app.spring5recipeapp.controllers
 
-import mmo.app.spring5recipeapp.commands.RecipeCommand
+import mmo.app.spring5recipeapp.domain.Recipe
 import mmo.app.spring5recipeapp.services.RecipeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
+
 
 @Controller
 class RecipeController {
@@ -16,27 +14,40 @@ class RecipeController {
     @Autowired
     private lateinit var recipeService: RecipeService
 
-    @RequestMapping("recipe/show/{id}")
-    fun showById(@PathVariable id: String, model: Model): String {
+    @RequestMapping("recipe/{id}/show")
+    fun showById(@PathVariable id: Long, model: Model): String {
 
-        model.addAttribute("recipe", recipeService.findById(id.toLong()))
+        recipeService.findById(id) ?: throw Exception("Nie znaleziono przepisu o podnaym id")
+
+        model.addAttribute("recipe", recipeService.findById(id))
 
         return "recipe/show"
     }
 
-    @RequestMapping("recipe/new")
-    fun newRecipe(model: Model): String {
-        model.addAttribute("recipe", RecipeCommand())
-
+    @GetMapping("/recipe/create")
+    fun recipeForm(model: Model): String {
+        model.addAttribute("recipe", Recipe())
         return "recipe/recipeform"
     }
 
-    @PostMapping
-    @RequestMapping("recipe")
-    fun saveOrUpdate(@ModelAttribute command: RecipeCommand): String {
-        val savedCommand = recipeService.saveRecipeCommand(command)
+    @PostMapping("/recipe/create")
+    fun recipeSubmit(@ModelAttribute("recipe") recipe: Recipe, model: Model): String {
+        model.addAttribute("recipe", recipe)
+        recipeService.save(recipe)
+        return "recipe/show"
+    }
 
-        return "redirect:/recipe/show/" + savedCommand.id
+    @RequestMapping("/recipe/{id}/update")
+    fun updateRecipe(@PathVariable id: String, model: Model): String {
+        model.addAttribute("recipe", recipeService.findById(id.toLong()))
+        return "recipe/recipeform"
+    }
+
+    @PostMapping("/recipe/{id}/update")
+    fun recipeUpdate(@ModelAttribute("recipe") recipe: Recipe, model: Model): String {
+        model.addAttribute("recipe", recipe)
+        recipeService.save(recipe)
+        return "recipe/show"
     }
 
 }
