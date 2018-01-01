@@ -1,6 +1,7 @@
 package mmo.app.spring5recipeapp.controllers
 
 import mmo.app.spring5recipeapp.domain.Recipe
+import mmo.app.spring5recipeapp.services.IngredientService
 import mmo.app.spring5recipeapp.services.RecipeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -48,6 +49,14 @@ class RecipeController {
         model.addAttribute("recipe", recipe)
         recipeService.save(recipe)
         return "recipe/show"
+    }
+
+
+    @GetMapping
+    @RequestMapping("recipe/{id}/delete")
+    fun deleteById(@PathVariable id: String): String {
+        recipeService.deleteById(id.toLong())
+        return "redirect:/"
     }
 
 }
