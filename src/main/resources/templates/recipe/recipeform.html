@@ -20,6 +20,7 @@
 <ul class="nav nav-pills">
     <li role="presentation"><a href="#" th:href="@{/index}">Wszystkie przepisy</a></li>
     <li role="presentation" class="active"><a href="#" th:href="@{/recipe/create}">Dodaj przepis</a></li>
+    <li role="presentation"><a href="#" th:href="@{/ingredients}">Wszystkie składniki</a></li>
 </ul>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
@@ -104,7 +105,7 @@
                                     <h1 class="panel-title">Składniki</h1>
                                 </div>
                                 <div class="col-md-8">
-                                    <a class="btn btn-default" href="#" role="button" >Pokaż</a>
+                                    <a class="btn btn-default" href="#" role="button">Pokaż</a>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +134,8 @@
                             <div class="row">
                                 <div class="col-md-12 form-group">
                                     <!--/*@thymesVar id="recipe" type="mmo.app.spring5recipeapp.domain.Recipe"*/-->
-                                    <textarea class="form-control" rows="3" th:field="*{recipe.directions}"></textarea></div>
+                                    <textarea class="form-control" rows="3" th:field="*{recipe.directions}"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
