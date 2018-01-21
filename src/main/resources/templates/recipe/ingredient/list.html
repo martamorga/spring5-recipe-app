@@ -29,7 +29,9 @@
 
                 <div class="panel-heading">
                     <h1 class="panel-title">Lista składników</h1>
-                    <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/create'}">Dodaj nowy składnk</a>
+                    <button>
+                        <a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/create'}">Dodaj nowy składnk</a>
+                    </button>
                 </div>
                 <div class="panel-body">
                     <!--/*@thymesVar id="recipe" type="mmo.app.spring5recipeapp.domain.Recipe"*/-->
