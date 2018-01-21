@@ -117,24 +117,4 @@ class IngredientController {
         })
         return "recipe/ingredient/show"
     }
-
-//    @RequestMapping("recipe/{recipeId}/ingredient/create")
-//    fun createRecipe(@PathVariable recipeId: String,
-//                     model: Model): String {
-//        model.addAttribute("recipe", recipeService.findById(recipeId.toLong()))
-//        model.addAttribute("ingredient", Ingredient())
-//        model.addAttribute("uomList", unitOfMeasureService.findAllUnitOfMeasures())
-//        return "recipe/ingredient/ingredientform"
-//    }
-//
-//    @PostMapping("recipe/{recipeId}/ingredient/create")
-//    fun createRecipe(@ModelAttribute recipe: Recipe,
-//                     @ModelAttribute("ingredient") ingredient: Ingredient,
-//                     @ModelAttribute("uomEach") uomEach: UnitOfMeasure,
-//                     model: Model): String {
-//        val desc= unitOfMeasureService.findByDescription(ingredient.unitOfMeasure!!.description)
-//        model.addAttribute("ingredient", ingredientService.create(ingredient, desc))
-//        return "recipe/ingredient/show"
-//    }
-
 }
