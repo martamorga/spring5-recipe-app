@@ -117,4 +117,14 @@ class IngredientController {
         })
         return "recipe/ingredient/show"
     }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/{id}/delete")
+    fun deleteIngredient(@PathVariable recipeId: String,
+                         @PathVariable id: String,
+                         model: Model): String {
+
+        model.addAttribute("ingredient", ingredientService.deleteById(id.toLong()))
+        return "redirect:/recipe/{recipeId}/ingredients"
+    }
 }
