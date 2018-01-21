@@ -12,7 +12,9 @@ interface IngredientService {
 
     fun deleteById(ingredientId: Long)
 
-    fun save(ingredient: Ingredient): Ingredient
+    fun save(ingredient: Ingredient, uom: UnitOfMeasure): Ingredient
+
+    fun create(ingredient: Ingredient): Ingredient
 
     fun getIngredients(): Set<Ingredient>
 

@@ -5,6 +5,7 @@ import mmo.app.spring5recipeapp.domain.Recipe
 import mmo.app.spring5recipeapp.domain.UnitOfMeasure
 import mmo.app.spring5recipeapp.repositories.IngredientRepository
 import mmo.app.spring5recipeapp.repositories.RecipeRepository
+import mmo.app.spring5recipeapp.repositories.UnitOfMeasureRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -16,6 +17,9 @@ class IngredientServiceImpl : IngredientService {
 
     @Autowired
     lateinit var ingredientRepository: IngredientRepository
+
+    @Autowired
+    lateinit var unitOfMeasureRepository: UnitOfMeasureRepository
 
     override fun findByRecipeIdAndIngredientId(recipeId: Long, ingredientId: Long): Ingredient {
 
@@ -49,7 +53,7 @@ class IngredientServiceImpl : IngredientService {
         return ingredient.unitOfMeasure
     }
 
-    override fun save(ingredient: Ingredient): Ingredient {
+    override fun save(ingredient: Ingredient, uom: UnitOfMeasure): Ingredient {
 
         val recipeNew = if (ingredient.recipe?.description.isNullOrEmpty()) {
             getRecipeId(ingredient.id!!)
@@ -57,12 +61,7 @@ class IngredientServiceImpl : IngredientService {
             ingredient.recipe
         }
 
-        val unitOfMeasureNew = if (ingredient.unitOfMeasure?.description.isNullOrEmpty()) {
-            getUnitOfMeasure(ingredient.id!!)
-        } else {
-            ingredient.unitOfMeasure
-        }
-
+        val unitOfMeasureNew = unitOfMeasureRepository.findByDescription(uom.description)
 
         val newIngredient = ingredient.apply {
             id = ingredient.id
@@ -72,6 +71,11 @@ class IngredientServiceImpl : IngredientService {
             unitOfMeasure = unitOfMeasureNew
         }
         return ingredientRepository.save(newIngredient)
+    }
+
+    override fun create(ingredient: Ingredient): Ingredient {
+
+        return ingredientRepository.save(ingredient)
     }
 
 
