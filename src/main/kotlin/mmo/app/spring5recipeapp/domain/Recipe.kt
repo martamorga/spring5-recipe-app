@@ -1,6 +1,9 @@
 package mmo.app.spring5recipeapp.domain
 
+import org.hibernate.validator.constraints.NotBlank
 import javax.persistence.*
+import javax.validation.constraints.Max
+import javax.validation.constraints.Min
 
 @Entity
 class Recipe {
@@ -9,11 +12,15 @@ class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    @Lob
+    @NotBlank
     var description: String = ""
 
+    @Min(1)
+    @Max(999)
     var prepTime: Int = 0
 
+    @Min(1)
+    @Max(999)
     var cookTime: Int = 0
 
     var servings: Int = 0

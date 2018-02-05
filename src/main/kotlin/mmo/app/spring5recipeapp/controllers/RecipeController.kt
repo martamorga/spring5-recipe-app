@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
+import javax.validation.Valid
 
 
 @Controller
@@ -17,6 +19,7 @@ class RecipeController {
 
     companion object : KLogging()
 
+    private val RECIPE_RECIPEFORM_URL = "recipe/recipeform"
 
     @Autowired
     private lateinit var recipeService: RecipeService
@@ -38,8 +41,14 @@ class RecipeController {
     }
 
     @PostMapping("/recipe/create")
-    fun recipeSubmit(@ModelAttribute("recipe") recipe: Recipe, model: Model): String {
-        model.addAttribute("recipe", recipe)
+    fun recipeSubmit(@Valid @ModelAttribute("recipe") recipe: Recipe, bindingResult: BindingResult): String {
+        if (bindingResult.hasErrors()) {
+
+            bindingResult.allErrors.forEach { objectError -> logger.debug(objectError.toString()) }
+
+            return RECIPE_RECIPEFORM_URL
+        }
+
         recipeService.save(recipe)
         return "recipe/show"
     }
@@ -51,7 +60,7 @@ class RecipeController {
     }
 
     @PostMapping("/recipe/{id}/update")
-    fun recipeUpdate(@ModelAttribute("recipe") recipe: Recipe, model: Model): String {
+    fun recipeUpdate(@Valid @ModelAttribute("recipe") recipe: Recipe, model: Model): String {
         model.addAttribute("recipe", recipe)
         recipeService.save(recipe)
         return "recipe/show"
@@ -67,15 +76,16 @@ class RecipeController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException::class)
-    fun handleNotFound(): ModelAndView {
+    fun handleNotFound(exception: Exception): ModelAndView {
 
         logger.error("Handling not found exception")
+        logger.error(exception.message)
 
         val modelAndView = ModelAndView()
 
         modelAndView.viewName = "404error"
+        modelAndView.addObject("exception", exception)
 
         return modelAndView
     }
-
 }
